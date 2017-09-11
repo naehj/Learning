@@ -37,9 +37,10 @@ This is empty on purpose! Your code to build the resume will go here.
   var work = {
 	"jobs": [
 	{
-		"employee": "N2S",
+		"employer": "N2S",
 		"title": "Estagiario",
-		"location": "Russas"
+		"location": "Russas",
+		"dates": 2017
 	}
 	]  
   };
@@ -62,7 +63,10 @@ This is empty on purpose! Your code to build the resume will go here.
 	  "pictureUrl" : "images/fry.jpg",
 	  "welcomeMessage" : "I'm Jhean Marllos and I'm awesome",
 	  "age" : 21,
-	  "graduacao" : "Ensino Médio"
+	  "graduacao" : "Ensino Médio",
+	  "contacts" :{
+		  "location":["Russas, CE", "Fortaleza, CE"]
+	  }
   };
   
   var education = {
@@ -81,16 +85,55 @@ This is empty on purpose! Your code to build the resume will go here.
 		"title": "GitHub",
 		"school": "Udacity",
 		"dates": 2017
-	}
+	},
 	{
 		"title": "HTML, CSS",
 		"school": "Udacity",
 		"dates": 2017
-	}
+	},
 	{
 		"title": "JavaScript",
 		"school": "Udacity",
 		"dates": 2017
 	}
 	]
-  };
+  }
+  
+  function displayWork(){
+	  for(job in work.jobs){
+		  $("#workExperience"). append(HTMLworkStart);
+		  var thisEmployer= HTMLworkEmployer.replace("%data%",work.jobs[job].employer);
+		  var thisTitle= HTMLworkTitle.replace("%data%",work.jobs[job].title);
+		  var thisDates= HTMLworkDates.replace("%data%",work.jobs[job].dates);
+		  var thisLocation= HTMLworkLocation.replace("%data%",work.jobs[job].location);
+		  var thisEmployerTitle= thisEmployer+thisTitle;
+		  $(".work-entry:last"). append(thisEmployerTitle);
+		  $(".work-entry:last"). append(thisDates);
+		  $(".work-entry:last"). append(thisLocation);
+	  }
+  }
+  
+  /*function inName(nome){
+	  nome = nome.trim().split(" ");
+	  nome[1]=nome[1].toUpperCase();
+	  nome[0]=nome[0].slice(0,1).toUpperCase+ nome[0].slice(1).toLowerCase;
+	  return (nome[0]+" "+nome[1]);
+  }
+  $('#main').append("jhean marllos");
+  $('#main').append(internationalizeButton);*/
+  
+  
+projects.display = function(){
+	for(project in projects.projects){
+		$("projects"). append(HTMLprojectStart);
+		var thisTitle= HTMLprojectTitle.replace("%data%",projects.projects[project].title);
+		var thisDates= HTMLprojectDates.replace("%data%",projects.projects[project].dates);
+		var thisDescription= HTMLprojectDescription.replace("%data%",projects.projects[project].description);
+		$(".project-entry:last"). append(thisTitle);
+		$(".project-entry:last"). append(thisDates);
+		$(".project-entry:last"). append(thisDescription);
+	}
+}
+
+$("#mapDiv").append(googleMap);
+initializeMap();
